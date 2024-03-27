@@ -1,22 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+
 
 const TelaHome = () => {
-  // Exemplo de dados de restaurantes
   const restaurantData = [
-  /*  {
-      id: '1',
-      name: 'Restaurante 1',
-      cuisine: 'Comida Brasileira',
-      image: require('./assets/restaurant1.jpg'),
-    },
-    {
-      id: '2',
-      name: 'Restaurante 2',
-      cuisine: 'Comida Italiana',
-      image: require('./assets/restaurant2.jpg'),
-    },*/
-    // Adicione mais dados conforme necessário
   ];
 
   const renderRestaurantItem = ({ item }) => (
@@ -31,7 +18,7 @@ const TelaHome = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>iFood</Text>
+      <Text style={styles.header}>SaborFit</Text>
       <FlatList
         data={restaurantData}
         renderItem={renderRestaurantItem}
