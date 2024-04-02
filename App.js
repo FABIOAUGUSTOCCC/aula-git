@@ -3,9 +3,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHome, faUser, faBell, faClipboardList, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faBell, faClipboardList } from '@fortawesome/free-solid-svg-icons';
 
 import EmailUsuario from './src/pages/EmailUsuario/EmailUsuario';
 import SenhaUsuario from './src/pages/SenhaUsuario/SenhaUsuario';
@@ -14,22 +13,12 @@ import TelaPerfil from './src/pages/Perfil/TelaPerfil';
 import TelaPedidos from './src/pages/Pedidos/TelaPedidos';
 import TelaNotificacao from './src/pages/Notificacao/TelaNotificacao';
 import TelaCarrinho from './src/pages/TelaCarrinho/TelaCarrinho';
+import NomeUsuario from './src/pages/NomeUsuario/NomeUsuario';
+import CelularUsuario from './src/pages/CelularUsuario/CelularUsuario';
+import CpfUsuario from './src/pages/CpfUsuario/CpfUsuario';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
-const TopTab = createMaterialTopTabNavigator();
-
-function TopTabs() {
-    return (
-        <TopTab.Navigator>
-            <TopTab.Screen name="TelaCarrinho" component={TelaCarrinho} options={{
-                tabBarIcon: ({ color, size }) => (
-                    <FontAwesomeIcon icon={faShoppingCart} color={color} size={size} />
-                ),
-            }} />
-        </TopTab.Navigator>
-    );
-}
 
 function BottomTabs() {
     return (
@@ -68,17 +57,11 @@ export default function App() {
                 <Stack.Screen name="TelaNotificacao" component={TelaNotificacao}/>
                 <Stack.Screen name="TelaPedidos" component={TelaNotificacao}/>
                 <Stack.Screen name="TelaPerfil" component={TelaPerfil}/>
-                <Stack.Screen name="TelaCarrinho" component={TopTabs}/>
-                <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: false }} />
+                <Stack.Screen name="TelaCarrinho" component={TelaCarrinho}/>
+                <Stack.Screen name="NomeUsuario" component={NomeUsuario}/>
+                <Stack.Screen name="CelularUsuario" component={CelularUsuario}/>
+                <Stack.Screen name="CpfUsuario" component={CpfUsuario}/>
             </Stack.Navigator>
         </NavigationContainer>
-    );
-}
-function MainTabs() {
-    return (
-        <React.Fragment>
-            <TopTabs />
-            <BottomTabs />
-        </React.Fragment>
     );
 }

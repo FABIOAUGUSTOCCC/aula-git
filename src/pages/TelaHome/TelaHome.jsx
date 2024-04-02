@@ -1,30 +1,43 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { View, Image, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
 
+library.add(faShoppingCart, faSearch);
 
 const TelaHome = () => {
-  const restaurantData = [
-  ];
+  const [searchText, setSearchText] = useState('');
 
-  const renderRestaurantItem = ({ item }) => (
-    <TouchableOpacity style={styles.restaurantContainer}>
-      <Image source={item.image} style={styles.restaurantImage} />
-      <View style={styles.restaurantInfo}>
-        <Text style={styles.restaurantName}>{item.name}</Text>
-        <Text style={styles.restaurantCuisine}>{item.cuisine}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const handleButtonPress = ({navigation}) => {
+    console.log('Botão pressionado!');
+    navigation.navigate('TelaCarrinho');
+  };
+
+  const handleSearch = () => {
+    console.log('Texto de pesquisa:', searchText);
+   
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>SaborFit</Text>
-      <FlatList
-        data={restaurantData}
-        renderItem={renderRestaurantItem}
-        keyExtractor={item => item.id}
-        style={styles.restaurantList}
-      />
+      <View>
+        <Image src='./assets/imagensApp/restaurant1.jpg'/>
+      </View>
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Pesquisar"
+          onChangeText={setSearchText}
+          value={searchText}
+        />
+        <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
+          <FontAwesomeIcon icon="search" size={20} color="white" />
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
+        <FontAwesomeIcon icon="shopping-cart" size={24} color="white" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -32,40 +45,40 @@ const TelaHome = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingTop: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  restaurantList: {
-    flex: 1,
-  },
-  restaurantContainer: {
+  searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
   },
-  restaurantImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginRight: 16,
-  },
-  restaurantInfo: {
+  input: {
     flex: 1,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
   },
-  restaurantName: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  searchButton: {
+    backgroundColor: '#3FA781',
+    padding: 10,
+    marginLeft: 10,
+    borderRadius: 5,
   },
-  restaurantCuisine: {
-    fontSize: 14,
-    color: '#777',
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#3FA781',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
   },
+  image: {
+    width: 200,
+    height: 200,
+  }
 });
 
 export default TelaHome;

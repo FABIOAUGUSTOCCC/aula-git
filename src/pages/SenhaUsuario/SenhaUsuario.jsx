@@ -8,7 +8,7 @@ export default function SenhaUsuario({ navigation }) {
 
   const handleProximoPress = () => {
     console.log('Senha inserida:', senha);
-    navigation.navigate('TelaHome');
+    navigation.navigate('NomeUsuario');
   };
 
   return (
