@@ -1,10 +1,12 @@
 // App.js
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Header, createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faUser, faBell, faClipboardList } from '@fortawesome/free-solid-svg-icons';
+import HeaderCadastro from '../../Components/HeaderCadastro/HeaderCadastro';
+
 
 import EmailUsuario from './src/pages/EmailUsuario/EmailUsuario';
 import SenhaUsuario from './src/pages/SenhaUsuario/SenhaUsuario';
@@ -16,14 +18,15 @@ import TelaCarrinho from './src/pages/TelaCarrinho/TelaCarrinho';
 import NomeUsuario from './src/pages/NomeUsuario/NomeUsuario';
 import CelularUsuario from './src/pages/CelularUsuario/CelularUsuario';
 import CpfUsuario from './src/pages/CpfUsuario/CpfUsuario';
+import { Title } from 'react-native-paper';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 
 function BottomTabs() {
     return (
-        <BottomTab.Navigator>
-            <BottomTab.Screen name="Home" component={TelaHome} options={{
+        <BottomTab.Navigator screenOptions={{headerShown:false}}>
+            <BottomTab.Screen  name="Home" component={TelaHome} options={{
                 tabBarIcon: ({ color, size }) => (
                     <FontAwesomeIcon icon={faHome} color={color} size={size} />
                 ),
@@ -50,7 +53,7 @@ function BottomTabs() {
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="EmailUsuario" component={EmailUsuario} />
                 <Stack.Screen name="SenhaUsuario" component={SenhaUsuario} />
                 <Stack.Screen name="TelaHome" component={BottomTabs}/>

@@ -20,9 +20,11 @@ const TelaHome = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Image src='./assets/imagensApp/restaurant1.jpg'/>
+    <View>
+       <View style={styles.faShoppingCartContainer}>
+      <TouchableOpacity style={styles.faShoppingCartbutton} onPress={handleButtonPress}>
+        <FontAwesomeIcon icon="shopping-cart" size={24} color="white"/>
+      </TouchableOpacity>
       </View>
       <View style={styles.searchContainer}>
         <TextInput
@@ -31,27 +33,16 @@ const TelaHome = () => {
           onChangeText={setSearchText}
           value={searchText}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-          <FontAwesomeIcon icon="search" size={20} color="white" />
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-        <FontAwesomeIcon icon="shopping-cart" size={24} color="white" />
-      </TouchableOpacity>
+      </View> 
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginTop:170,
   },
   input: {
     flex: 1,
@@ -67,18 +58,24 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     borderRadius: 5,
   },
-  button: {
-    flexDirection: 'row',
+  faShoppingCartContainer: {
+    paddingLeft: 300,
+    borderRadius: 100,
+    marginTop:20,
+
+
+  },
+  faShoppingCartbutton: {
     alignItems: 'center',
     backgroundColor: '#3FA781',
     paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 50,
+    borderRadius: 100,
+    borderWidth: 2,
+    width: 50, 
+    height: 50,
+    marginTop:20, 
   },
-  image: {
-    width: 200,
-    height: 200,
-  }
 });
+
 
 export default TelaHome;

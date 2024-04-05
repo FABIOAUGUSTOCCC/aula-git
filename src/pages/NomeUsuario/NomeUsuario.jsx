@@ -1,17 +1,28 @@
-import React, { useState } from  'react';
+// EmailScreen.js
+import React, { useEffect, useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import HeaderCadastro from '../../Components/HeaderCadastro/HeaderCadastro';
 
-export default function NomeUsuario({navigation}) {
-    const [nome, setNome] = useState('');
-  
-    const handleProximoPress = () => {
-      console.log('Nome inserido', nome);
-      navigation.navigate('CelularUsuario');
-    };
 
-    return (
-      <View style={styles.container}>
-        <Text style={styles.label}>Insira seu nome</Text>
+export default function NomeUsuario({ navigation, route }) {
+  const [nome, setNome] = useState('');
+
+  const { usuario } = route.params;
+
+  useEffect(() => { console.log(usuario) }, [])
+
+  const handleProximoPress = () => {
+    console.log('Nome inserido:', nome);
+    navigation.navigate('CelularUsuario');
+  };
+
+  return (
+    <View style={styles.container}>
+      <HeaderCadastro etapaAtual={2} />
+
+      <View style={styles.content}>
+        <Text style={styles.label}>Digite seu nome:</Text>
+        <Text style={styles.label}>email cadastrado</Text>  {/* inserir logica para trazer o email cadastrado */}
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
@@ -24,16 +35,18 @@ export default function NomeUsuario({navigation}) {
           <Text style={styles.buttonText}>Próximo</Text>
         </TouchableOpacity>
       </View>
-    );
-
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    paddingHorizontal: 20,
-    paddingTop: 60,
+  },
+  content: {
+    paddingTop: 40,
+    paddingHorizontal: 10
   },
   label: {
     fontSize: 16,

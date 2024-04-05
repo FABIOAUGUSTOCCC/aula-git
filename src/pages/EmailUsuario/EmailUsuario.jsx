@@ -1,31 +1,38 @@
 // EmailScreen.js
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import HeaderCadastro from '../../Components/HeaderCadastro/HeaderCadastro';
 
 
 export default function EmailUsuario({ navigation }) {
   const [email, setEmail] = useState('');
 
   const handleProximoPress = () => {
-    console.log('Email inserido:', email);
-    navigation.navigate('SenhaUsuario');
+    const usuario = {
+      email
+    }
+    navigation.navigate('SenhaUsuario', { usuario });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Digite seu email:</Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEmail}
-          value={email}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
+      <HeaderCadastro etapaAtual={0} />
+
+      <View style={styles.content}>
+        <Text style={styles.label}>Digite seu email:</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setEmail}
+            value={email}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
+        <TouchableOpacity style={styles.button} onPress={handleProximoPress}>
+          <Text style={styles.buttonText}>Próximo</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleProximoPress}>
-        <Text style={styles.buttonText}>Próximo</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -34,8 +41,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    paddingHorizontal: 20,
-    paddingTop: 60,
+  },
+  content: {
+    paddingTop: 40,
+    paddingHorizontal: 10
   },
   label: {
     fontSize: 16,
