@@ -2,14 +2,29 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import HeaderCadastro from '../../Components/HeaderCadastro/HeaderCadastro';
+import ToastService from '../../Services/ToastService';
+import ApiService from '../../Services/ApiService';
 
 
-export default function CpfUsuario({ navigation }) {
+export default function CpfUsuario({ navigation, route }) {
   const [cpf, setCpf] = useState('');
 
-  const handleProximoPress = () => {
-    console.log('CPF inserido:', cpf);
-    navigation.navigate('TelaHome');
+  const { usuario } = route.params;
+
+  const handleProximoPress = async () => {
+    if (!cpf) {
+      ToastService.Error("Erro ao cadastrar", "CPF Inválido");
+      return;
+    }
+    usuario.cpf = cpf;
+
+    try {
+      await ApiService.post('/clientes/cadastrarcliente', usuario);
+      ToastService.Success("Usuário cadastrado com sucesso!");
+
+    } catch (error) {
+      ToastService.Error("Erro ao cadastrar usuário");
+    }
   };
 
   return (

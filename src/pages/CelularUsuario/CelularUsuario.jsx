@@ -2,14 +2,22 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import HeaderCadastro from '../../Components/HeaderCadastro/HeaderCadastro';
+import ToastService from '../../Services/ToastService';
 
 
-export default function CelularUsuario({ navigation }) {
+export default function CelularUsuario({ navigation, route }) {
   const [celular, setCeluar] = useState('');
+
+  const { usuario } = route.params;
 
   const handleProximoPress = () => {
     console.log('Celular inserido:', celular);
-    navigation.navigate('CpfUsuario');
+    if (!celular) {
+      ToastService.Error("Erro ao cadastrar", "Celular inválido");
+      return;
+    }
+    usuario.celular = celular;
+    navigation.navigate('CpfUsuario', { usuario });
   };
 
   return (

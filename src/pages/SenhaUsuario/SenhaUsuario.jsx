@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import HeaderCadastro from '../../Components/HeaderCadastro/HeaderCadastro';
+import ToastService from '../../Services/ToastService';
 
 
 export default function SenhaUsuario({ navigation, route }) {
@@ -10,6 +11,12 @@ export default function SenhaUsuario({ navigation, route }) {
   const { usuario } = route.params;
 
   const handleProximoPress = () => {
+
+    if (!senha) {
+      ToastService.Error("Erro ao cadastrar", "Senha inválida")
+      return;
+    }
+
     usuario.senha = senha;
     navigation.navigate('NomeUsuario', { usuario });
   };
@@ -24,7 +31,7 @@ export default function SenhaUsuario({ navigation, route }) {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            onChangeText={setSenha}
+            onChangeText={(texto) => setSenha(texto)}
             value={senha}
             autoCapitalize="none"
             placeholder='Insira sua senha:  6-64 caracteres'

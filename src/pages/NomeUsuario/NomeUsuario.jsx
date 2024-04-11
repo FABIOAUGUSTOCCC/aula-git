@@ -9,11 +9,9 @@ export default function NomeUsuario({ navigation, route }) {
 
   const { usuario } = route.params;
 
-  useEffect(() => { console.log(usuario) }, [])
-
   const handleProximoPress = () => {
-    console.log('Nome inserido:', nome);
-    navigation.navigate('CelularUsuario');
+    usuario.nome = nome;
+    navigation.navigate('CelularUsuario', { usuario });
   };
 
   return (
@@ -26,7 +24,7 @@ export default function NomeUsuario({ navigation, route }) {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            onChangeText={setNome}
+            onChangeText={(texto) => setNome(texto)}
             value={nome}
             autoCapitalize="none"
           />

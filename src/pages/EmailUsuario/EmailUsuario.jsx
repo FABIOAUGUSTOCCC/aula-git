@@ -1,16 +1,28 @@
-// EmailScreen.js
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import HeaderCadastro from '../../Components/HeaderCadastro/HeaderCadastro';
+import ToastService from '../../Services/ToastService';
 
-
-export default function EmailUsuario({ navigation }) {
+const EmailUsuario = ({ navigation }) => {
   const [email, setEmail] = useState('');
 
-  const handleProximoPress = () => {
+  const validarEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const handleProximoPress = async () => {
+
+    if (!validarEmail(email)) {
+
+      ToastService.Error("Erro ao cadastrar", "E-mail inválido");
+      return;
+    }
+
     const usuario = {
       email
     }
+
     navigation.navigate('SenhaUsuario', { usuario });
   };
 
@@ -23,7 +35,7 @@ export default function EmailUsuario({ navigation }) {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            onChangeText={setEmail}
+            onChangeText={(texto) => setEmail(texto)}
             value={email}
             keyboardType="email-address"
             autoCapitalize="none"
@@ -35,7 +47,7 @@ export default function EmailUsuario({ navigation }) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -66,7 +78,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#3FA781',
     paddingVertical: 10,
     borderRadius: 5,
-    marginTop: 540,
   },
   buttonText: {
     color: 'white',
@@ -74,3 +85,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default EmailUsuario;
